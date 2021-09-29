@@ -93,9 +93,10 @@ int main() {
 			endingBalance = beginningBalance + interestEarned
 				+ additionalInvestment;
 
-			cout << setw(12) << beginningBalance << setw(15)
-				<< additionalInvestment << setw(15) << interestEarned
-				<< setw(17) << endingBalance << setw(9) << currentYear << endl;
+			cout << "$" << setw(11) << beginningBalance << setw(6) << "$"
+				<< setw(9) << additionalInvestment << setw(6) << "$"
+				<< setw(9) << interestEarned << setw(6) << "$" << setw(11)
+				<< endingBalance << setw(9) << currentYear << endl;
 			currentYear += 1;
 		}
 	}
@@ -110,9 +111,10 @@ int main() {
 			endingBalance = beginningBalance + interestEarned
 				+ additionalInvestment;
 
-			cout << setw(12) << beginningBalance << setw(15)
-				<< additionalInvestment << setw(15) << interestEarned
-				<< setw(17) << endingBalance << setw(9) << currentMonth << endl;
+			cout << "$" << setw(11) << beginningBalance << setw(6) << "$"
+				<< setw(9) << additionalInvestment << setw(6) << "$"
+				<< setw(9) << interestEarned << setw(6) << "$" << setw(11)
+				<< endingBalance << setw(9) << currentMonth << endl;
 			currentMonth += 1;
 		}
 	}
@@ -136,7 +138,7 @@ int main() {
 			currentMonth += 1;
 		}
 	}
- 	else if (monthYear == 'Y') {
+	else if (monthYear == 'Y') {
 		while (currentMonth <= endMonth) {
 			beginningBalance = endingBalance;
 			additionalInvestment = salary * percentInvested ;
