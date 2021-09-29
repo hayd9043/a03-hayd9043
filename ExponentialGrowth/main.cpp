@@ -11,24 +11,21 @@
 #include<iostream>
 #include<iomanip>
 #include<string>
+#include<cmath>
 
 using namespace std;
 
 int main() {
 	const int MONTHS_PER_YEAR = 12, PERCENT_CONVERSION = 100;
 
-	const double monthlyInterestRate = (0.06 / 12);
+	double additionalInvestment, beginningBalance = 0,
+		endingBalance = 0, interestEarned, monthlyInterestRate,
+		percentInvested, rateOfReturn, salary;
 
-	double salary, percentInvested, rateOfReturn, beginningBalance = 0,
-		additionalInvestment, interestEarned ,
-		endingBalance = 0;
-
-	int endMonth, endYear, currentMonth = 1, currentYear = 1;
+	int currentMonth = 1, currentYear = 1, endMonth, endYear;
 	char monthYear;
+
 	string time;
-
-
-
 
 	cout << fixed << setprecision(2);
 
@@ -46,6 +43,9 @@ int main() {
 	cout << "Enter Investment Rate of Return % ";
 	cin >> rateOfReturn;
 
+	//convert percent from int to a functional decimal
+	rateOfReturn = rateOfReturn / PERCENT_CONVERSION;
+
 	cout << "Enter Years Until Retirement: ";
 	cin >> endYear;
 
@@ -53,13 +53,13 @@ int main() {
 	cout << "Print Results [ M)onth, Y)early ] : ";
 	cin >> monthYear;
 
-	while(monthYear != 'Y' && monthYear != 'M') {
+	while (monthYear != 'Y' && monthYear != 'M') {
 		cout << "Invalid Input/Enter 'M' or 'Y' : ";
 		cin >> monthYear;
 	}
 
-
-	cout << endl;
+	//Determine if we are in years or months and 'time'
+	//goes into display table
 
 	if (monthYear == 'Y') {
 		time = "Year";
@@ -68,6 +68,7 @@ int main() {
 		time = "Month";
 	}
 
+	cout << endl;
 	cout << setw(12) << "Beginning" << setw(15) << "Additional"
 		<< setw(15) << "Interest" << setw(17) << "Ending"
 		<< setw(9) << time << endl;
@@ -80,8 +81,10 @@ int main() {
 		<< setw(15) << "----------" << setw(17) << "------------"
 		<< setw(9) << "----" << endl;
 
+	endMonth = endYear * MONTHS_PER_YEAR;
+	monthlyInterestRate = rateOfReturn / MONTHS_PER_YEAR;
+
 	if (monthYear == 'Y') {
-		endYear = endYear;
 		while (currentYear <= endYear) {
 			beginningBalance = endingBalance;
 			additionalInvestment = salary * percentInvested;
@@ -99,7 +102,7 @@ int main() {
 	else if (monthYear == 'M') {
 		endMonth = endYear * MONTHS_PER_YEAR;
 		while (currentMonth <= endMonth) {
-			additionalInvestment = salary * percentInvested/MONTHS_PER_YEAR;
+			additionalInvestment = salary * percentInvested / MONTHS_PER_YEAR;
 			beginningBalance = endingBalance;
 			additionalInvestment = salary * percentInvested / MONTHS_PER_YEAR;
 			interestEarned = (beginningBalance + additionalInvestment) *
@@ -113,8 +116,57 @@ int main() {
 			currentMonth += 1;
 		}
 	}
-
 	cout << endl;
 
 	return EXIT_SUCCESS;
 }
+
+/*if (monthYear == 'M') {
+		while (currentMonth <= endMonth) {
+			beginningBalance = endingBalance;
+			additionalInvestment = salary * percentInvested / MONTHS_PER_YEAR;
+			interestEarned = (beginningBalance + additionalInvestment) *
+				monthlyInterestRate;
+			endingBalance = beginningBalance + interestEarned
+				+ additionalInvestment;
+
+			cout << setw(12) << beginningBalance << setw(15)
+				<< additionalInvestment << setw(15) << interestEarned
+				<< setw(17) << endingBalance << setw(9) << currentMonth << endl;
+			currentMonth += 1;
+		}
+	}
+ 	else if (monthYear == 'Y') {
+		while (currentMonth <= endMonth) {
+			beginningBalance = endingBalance;
+			additionalInvestment = salary * percentInvested ;
+			interestEarned = (beginningBalance + additionalInvestment) *
+				monthlyInterestRate;
+			endingBalance = beginningBalance + interestEarned
+				+ additionalInvestment;
+
+				cout << setw(12) << beginningBalance << setw(15)
+					<< additionalInvestment << setw(15) << interestEarned
+					<< setw(17) << endingBalance << setw(9) << currentMonth << endl;
+			currentMonth += 1;
+		}
+	}
+	else if (monthYear == 'Y') {
+		while (currentYear <= endYear) {
+			beginningBalance = endingBalance;
+			additionalInvestment = salary * percentInvested;
+			interestEarned = (beginningBalance + additionalInvestment)*pow((1 + (monthlyInterestRate)), 12);
+				//(1+(rateOfReturn/12));
+				//(beginningBalance + additionalInvestment)*();
+				//((beginningBalance + additionalInvestment)*
+				//)-(beginningBalance + additionalInvestment);
+			endingBalance = beginningBalance + interestEarned
+				+ additionalInvestment;
+
+			cout << setw(12) << beginningBalance << setw(15)
+				<< additionalInvestment << setw(15) << interestEarned
+				<< setw(17) << endingBalance << setw(9) << currentYear << endl;
+			currentYear += 1;
+		}
+	}
+*/
