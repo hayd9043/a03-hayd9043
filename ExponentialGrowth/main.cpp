@@ -3,22 +3,20 @@
 // Author:			Bryant Hayden
 // Date:				9/28/21
 // Class:				CS150-1
-// Assignment:
+// Assignment:	a03
 // Purpose:
 // Hours:       .8
 //**********************************************************************
 
 #include<iostream>
 #include<iomanip>
-#include<string>
-#include<cmath>
 
 using namespace std;
 
 int main() {
 	const int PERCENT_CONVERSION = 100;
 	double accountValue = -1, amountWithdrawn = -1, rateOfReturn = -1,
-		endingBalance, beginningBalance , earnings;
+		endingBalance, beginningBalance, earnings;
 	int currentYear = 1;
 
 	cout << fixed << setprecision(2);
@@ -63,7 +61,6 @@ int main() {
 		earnings = (beginningBalance - amountWithdrawn) * rateOfReturn;
 		endingBalance = beginningBalance - amountWithdrawn + earnings;
 
-
 		cout << "$" << setw(11) << beginningBalance << setw(6) << "$"
 			<< setw(9) << amountWithdrawn << setw(6) << "$"
 			<< setw(9) << earnings << setw(6) << "$" << setw(11)
@@ -71,5 +68,5 @@ int main() {
 		currentYear += 1;
 	}
 
-return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
