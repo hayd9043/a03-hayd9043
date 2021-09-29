@@ -15,8 +15,15 @@
 using namespace std;
 
 int main() {
+	const int MONTHS_PER_YEAR = 12, PERCENT_CONVERSION = 100;
 
-	double salary, percentInvested, rateOfReturn, years;
+	const double monthlyInterestRate = (0.06 / 12);
+
+	double salary, percentInvested, rateOfReturn, beginningBalance = 0,
+		additionalInvestment, interestEarned ,
+		endingBalance = 0;
+
+	int endMonth, endYear, currentMonth = 1, currentYear = 1;
 	char monthYear;
 	string time;
 
@@ -33,11 +40,14 @@ int main() {
 	cout << "Enter Percent of Salary Invested: % ";
 	cin >> percentInvested;
 
+	//convert percent from int to a functional decimal
+	percentInvested = percentInvested / PERCENT_CONVERSION;
+
 	cout << "Enter Investment Rate of Return % ";
 	cin >> rateOfReturn;
 
 	cout << "Enter Years Until Retirement: ";
-	cin >> years;
+	cin >> endYear;
 
 	cout << endl;
 	cout << "Print Results [ M)onth, Y)early ] : ";
@@ -47,6 +57,9 @@ int main() {
 		cout << "Invalid Input/Enter 'M' or 'Y' : ";
 		cin >> monthYear;
 	}
+
+
+	cout << endl;
 
 	if (monthYear == 'Y') {
 		time = "Year";
@@ -67,8 +80,41 @@ int main() {
 		<< setw(15) << "----------" << setw(17) << "------------"
 		<< setw(9) << "----" << endl;
 
-	cout << salary << " " << percentInvested << " "
-		<< rateOfReturn << " " << years << " " << monthYear;
+	if (monthYear == 'Y') {
+		endYear = endYear;
+		while (currentYear <= endYear) {
+			beginningBalance = endingBalance;
+			additionalInvestment = salary * percentInvested;
+			interestEarned = (beginningBalance + additionalInvestment) *
+				(monthlyInterestRate);
+			endingBalance = beginningBalance + interestEarned
+				+ additionalInvestment;
+
+			cout << setw(12) << beginningBalance << setw(15)
+				<< additionalInvestment << setw(15) << interestEarned
+				<< setw(17) << endingBalance << setw(9) << currentYear << endl;
+			currentYear += 1;
+		}
+	}
+	else if (monthYear == 'M') {
+		endMonth = endYear * MONTHS_PER_YEAR;
+		while (currentMonth <= endMonth) {
+			additionalInvestment = salary * percentInvested/MONTHS_PER_YEAR;
+			beginningBalance = endingBalance;
+			additionalInvestment = salary * percentInvested / MONTHS_PER_YEAR;
+			interestEarned = (beginningBalance + additionalInvestment) *
+				monthlyInterestRate;
+			endingBalance = beginningBalance + interestEarned
+				+ additionalInvestment;
+
+			cout << setw(12) << beginningBalance << setw(15)
+				<< additionalInvestment << setw(15) << interestEarned
+				<< setw(17) << endingBalance << setw(9) << currentMonth << endl;
+			currentMonth += 1;
+		}
+	}
+
+	cout << endl;
 
 	return EXIT_SUCCESS;
 }
